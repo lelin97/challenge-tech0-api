@@ -38,7 +38,7 @@ export default class Usuarios {
   @Column({ type: "uuid", nullable: true })
   usuario_atualizacao: string;
 
-  @OneToMany(() => Boletos, (b) => b.usuariosBoleto)
-  @JoinColumn({ referencedColumnName: "id_usuario", name: "id_boleto" })
-  boletos: Boletos[];
+  // @OneToMany(() => Boletos, (b) => b.usuariosBoleto)
+  // @JoinColumn({ referencedColumnName: "id_boleto", name: "id_usuario" })
+  // boletos: Boletos[];
 }

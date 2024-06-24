@@ -38,7 +38,7 @@ export default class Boletos {
   @Column({ type: "uuid", nullable: true })
   usuario_atualizacao: string;
 
-  @ManyToOne(() => Usuarios, (u) => u.boletos)
-  @JoinColumn({ referencedColumnName: "id_boleto", name: "id_usuario" })
-  usuariosBoleto: Usuarios;
+  // @ManyToOne(() => Usuarios, (u) => u.boletos)
+  // @JoinColumn({ referencedColumnName: "id_usuario", name: "id_boleto" })
+  // usuariosBoleto: Usuarios;
 }
