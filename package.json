@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon  --exec ts-node ./src/index.ts"
+    "start": "nodemon  --exec ts-node ./src/index.ts | pino-pretty -c",
+    "typeorm": "yarn typeorm-ts-node-esm",
+    "migration:generate": "sh -c 'yarn typeorm migration:generate ./src/migrations/${0} -d ./src/data-source.ts'",
+    "migration:run": "sh -c 'yarn typeorm migration:run -d ./src/data-source.ts'"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +20,14 @@
     "typescript": "^5.5.2"
   },
   "dependencies": {
+    "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "pg": "^8.12.0",
+    "pino": "^9.2.0",
+    "pino-pretty": "^11.2.1",
     "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "zod": "^3.23.8"
   }
 }

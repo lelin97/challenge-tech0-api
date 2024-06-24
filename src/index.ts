@@ -1,5 +1,6 @@
 import express from "express";
 import { AppDataSource } from "./data-source";
+import router from "./routes/routes";
 
 const app = express();
 const port = 4050;
@@ -9,11 +10,13 @@ AppDataSource.initialize().then(async () => {
 
   app.use(express.json());
 
-  app.get("/", (req, res) => {
-    return res.json("Funcionando");
-  });
+  // app.get("/", (req, res) => {
+  //   return res.json("Funcionando");
+  // });
 
-  return app.listen(port);
+  app.use(router);
+
+  app.listen(port);
 });
 
 //   .catch((error) => {
