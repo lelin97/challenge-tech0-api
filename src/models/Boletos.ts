@@ -2,12 +2,9 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import Usuarios from "./Usuarios";
 
 @Entity("boletos")
 export default class Boletos {
@@ -20,11 +17,23 @@ export default class Boletos {
   @CreateDateColumn({ type: "timestamp" })
   data_vencimento: Date;
 
-  @Column({ type: "float8" })
+  @Column({ type: "double precision" })
+  valor: number;
+
+  @Column({ type: "double precision" })
   valor_multa: number;
 
-  @Column({ type: "float8" })
+  @Column({ type: "double precision" })
   juros: number;
+
+  @Column({ type: "double precision" })
+  valor_total: number;
+
+  @Column({ nullable: true })
+  dt_baixa: Date;
+
+  @Column({ type: "boolean", default: false })
+  status_baixa: boolean;
 
   @CreateDateColumn()
   dt_cadastro: Date;
@@ -32,13 +41,9 @@ export default class Boletos {
   @Column("uuid")
   usuario_cadastro: string;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ nullable: true, default: null })
   dt_atualizacao: Date;
 
   @Column({ type: "uuid", nullable: true })
   usuario_atualizacao: string;
-
-  // @ManyToOne(() => Usuarios, (u) => u.boletos)
-  // @JoinColumn({ referencedColumnName: "id_usuario", name: "id_boleto" })
-  // usuariosBoleto: Usuarios;
 }
