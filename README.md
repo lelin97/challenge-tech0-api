@@ -27,11 +27,11 @@ Crie um arquivo `.env`
 
 Coloque esse comando 
 
-`DB_HOST=localhost
-DB_PORT=5432
-DB_USER=user-ct
-DB_PASSWORD=12345678
-DB_NAME=ct-db`
+`DB_HOST=localhost`
+`DB_PORT=5432`
+`DB_USER=user-ct`
+`DB_PASSWORD=12345678`
+`DB_NAME=ct-db`
 
 Execute o comando `yarn start`
 
