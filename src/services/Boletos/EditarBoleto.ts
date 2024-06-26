@@ -27,6 +27,7 @@ export default class EditarBoleto {
         valor: campos.valor,
         valor_multa: campos.valor_multa,
         juros: campos.juros,
+        valor_total: campos.valor + campos.valor_multa,
       })
       .where({
         id_boleto,
