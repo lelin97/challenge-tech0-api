@@ -7,12 +7,13 @@ const { differenceInDays } = require("date-fns");
 export default class BaixaBoleto {
   public async executar(
     boletos: string[],
-    id_usuario: string
+    usuario_cadastro: string
   ): Promise<RetornoDB> {
     const tabelaBoleto = AppDataSource.getRepository(Boletos);
 
     const boletosEncontrados = await tabelaBoleto.find({
       select: {
+        id_boleto: true,
         data_vencimento: true,
         valor: true,
         valor_multa: true,
@@ -37,7 +38,7 @@ export default class BaixaBoleto {
     };
 
     const createQueryRunner = AppDataSource.createQueryRunner();
-    createQueryRunner.connect();
+    await createQueryRunner.connect();
 
     await createQueryRunner.startTransaction();
 
@@ -53,17 +54,17 @@ export default class BaixaBoleto {
         let valorTotal = boleto.valor_total;
 
         if (diasExpirados > 0) {
-          valorMulta =
-            boleto.valor + (boleto.juros / 100) * boleto.valor * diasExpirados;
+          valorMulta = (boleto.juros / 100) * boleto.valor * diasExpirados;
           valorTotal = boleto.valor + valorMulta;
         }
 
-        await tabelaBoleto.update(
+        await createQueryRunner.manager.update(
+          Boletos,
           {
             id_boleto: boleto.id_boleto,
           },
           {
-            usuario_atualizacao: id_usuario,
+            usuario_atualizacao: usuario_cadastro,
             valor_multa: valorMulta,
             valor_total: valorTotal,
             dt_baixa: dataAtual,
@@ -72,7 +73,7 @@ export default class BaixaBoleto {
         );
       });
 
-      createQueryRunner.commitTransaction();
+      await createQueryRunner.commitTransaction();
     } catch (error) {
       resultado = {
         sucesso: false,
@@ -80,9 +81,9 @@ export default class BaixaBoleto {
         erro: `${error}`,
       };
 
-      createQueryRunner.rollbackTransaction();
+      await createQueryRunner.rollbackTransaction();
     } finally {
-      createQueryRunner.release();
+      await createQueryRunner.release();
     }
 
     return resultado;

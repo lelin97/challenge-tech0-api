@@ -2,11 +2,9 @@ import { AppDataSource } from "../../data-source";
 import Boletos from "../../models/Boletos";
 import { RetornoDB } from "../../types/retornoDB";
 import { TCadastroBoleto } from "../../zod/Boleto/cadastro";
-import { v4 as uuidv4 } from "uuid";
 
 export default class CriarBoleto {
   public async executar(campos: TCadastroBoleto): Promise<RetornoDB> {
-    const GUID = uuidv4();
     const tabelaBoleto = AppDataSource.getRepository(Boletos);
 
     const boletoExiste = await tabelaBoleto.findOne({
@@ -34,7 +32,7 @@ export default class CriarBoleto {
         valor_multa: campos.valor_multa,
         juros: campos.juros,
         valor_total: campos.valor + campos.valor_multa,
-        usuario_cadastro: GUID,
+        usuario_cadastro: "c15147ac-d5ca-406c-b1d7-73e18d0e7a2c",
       })
       .execute();
 

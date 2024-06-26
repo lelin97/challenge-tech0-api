@@ -9,6 +9,8 @@ export const cadastroBoleto = z.object({
   juros: z.coerce.number(),
 });
 
+export const baixaBoleto = z.array(z.string().uuid());
+
 export const deletarBoleto = z.string().uuid();
 
 export type TCadastroBoleto = z.infer<typeof cadastroBoleto>;

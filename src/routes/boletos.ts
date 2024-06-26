@@ -1,10 +1,15 @@
 import { Router } from "express";
 import CriarBoleto from "../services/Boletos/CriarBoleto";
-import { cadastroBoleto, deletarBoleto } from "../zod/Boleto/cadastro";
+import {
+  baixaBoleto,
+  cadastroBoleto,
+  deletarBoleto,
+} from "../zod/Boleto/cadastro";
 import logger from "../logger";
 import ListarBoletos from "../services/Boletos/ListarBoletos";
 import EditarBoleto from "../services/Boletos/EditarBoleto";
 import DeletarBoleto from "../services/Boletos/DeletarBoleto";
+import BaixaBoleto from "../services/Boletos/BaixaBoleto";
 
 const boletosRouter = Router();
 
@@ -54,6 +59,32 @@ boletosRouter.put("/atualizar-boleto/:id_boleto", async (req, res) => {
     return res.status(500).json({
       sucesso: false,
       mensagem: "Erro ao Editar Boleto.",
+      erro: error,
+    });
+  }
+});
+
+boletosRouter.put("/baixa-boleto/:usuario_cadastro", async (req, res) => {
+  try {
+    const dadosBody = baixaBoleto.safeParse(req.body);
+    const usuario_cadastro = req.params.usuario_cadastro;
+
+    if (dadosBody.error) {
+      return res.status(400).json({
+        sucesso: false,
+        mensagem: "Campos da requisição inválidos.",
+        error: dadosBody.error.errors,
+      });
+    }
+    const service = new BaixaBoleto();
+    const resultado = await service.executar(dadosBody.data, usuario_cadastro);
+
+    return res.status(resultado.sucesso ? 200 : 500).json(resultado);
+  } catch (error) {
+    logger.error("/baixa-boleto. ERRO:", error);
+    return res.status(500).json({
+      sucesso: false,
+      mensagem: "Erro ao realizar Baixa do Boleto.",
       erro: error,
     });
   }
