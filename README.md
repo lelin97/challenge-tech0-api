@@ -35,7 +35,7 @@ Coloque esses comandos no arquivo `.env`
 
 `DB_PASSWORD=12345678`
 
-`DB_NAME=ct-db`
+`DB_NAME=ctech-db`
 
 Execute o comando `yarn start`
 
