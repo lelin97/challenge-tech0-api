@@ -17,13 +17,13 @@ Zod
 Como usar:
 
 Clone este repositório para o seu computador.
-Execute o comando no terminal `yarn`
+Execute o comando no terminal 
+    yarn
 
-Tenha o Docker instalado em sua máquina,
+Tenha o Docker instalado em sua máquina
 Execute o comando no CMD `docker run --name ct-db -p 5432:5432 -e POSTGRES_USER=user-ct -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=ctech-db -d postgres`
-
 Execute o comando `yarn start`
 
-Caso deseje popular as tabelas do Banco,
+Caso deseje popular as tabelas do Banco
 Execute o comando `yarn migration:run`
 Execute o comando `yarn start`
