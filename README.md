@@ -1,10 +1,15 @@
 Este repositório contém o backend de um sistema de CRUD (Criar, Ler, Atualizar e Excluir) de boletos. 
 
 Funcionalidades:
+
 Gerenciamento de boletos:
+
 Criar novos boletos.
+
 Ler todos os boletos ou boletos específicos.
+
 Atualizar as informações de um boleto.
+
 Excluir um boleto.
 
 Tecnologias utilizadas:
