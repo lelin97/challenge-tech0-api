@@ -23,6 +23,16 @@ Tenha o Docker instalado em sua máquina
 
 Execute o comando no CMD `docker run --name ct-db -p 5432:5432 -e POSTGRES_USER=user-ct -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=ctech-db -d postgres`
 
+Crie um arquivo `.env`
+
+Coloque esse comando 
+
+`DB_HOST=localhost
+DB_PORT=5432
+DB_USER=user-ct
+DB_PASSWORD=12345678
+DB_NAME=ct-db`
+
 Execute o comando `yarn start`
 
 Caso deseje popular as tabelas do Banco
