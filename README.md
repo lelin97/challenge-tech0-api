@@ -23,7 +23,7 @@ Tenha o Docker instalado em sua máquina
 
 Execute o comando no CMD `docker run --name ct-db -p 5432:5432 -e POSTGRES_USER=user-ct -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=ctech-db -d postgres`
 
-Crie um arquivo `.env`
+Descomenente o arquivo `env.exampel` para `.env`
 
 Coloque esses comandos no arquivo `.env`
 
